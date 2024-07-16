@@ -1,4 +1,12 @@
 function [] = plotAllResults()
+%% This script runs all relevant plot functions to plot all results presented in the paper entitled "". 
+% Please ensure that a MATLAB release of R2023a or newer is used to run
+% this script 
+
+%Please ensure that the AMICI toolbox is installed  before runnig this script (https://github.com/AMICI-dev/AMICI) 
+
+% Finally, please ensure that all relevant models have been compiled before running this script.  To do this please run the "GenerateModels()" script has been run in
+% MATLAB R2017b.
 %% set up
 close all
 
@@ -6,7 +14,11 @@ addpath(genpath(fullfile(pwd,'./Data')))
 addpath(genpath(fullfile(pwd,'./lib')))
 addpath(genpath(fullfile(pwd,'./Models')))
 addpath(genpath(fullfile(pwd,'./Parameters')))
-GenerateModels()
+
+%% check Compatibility
+ if ~checkCompatibility() % if base requirements are not met terminate script. 
+     return
+ end
 
 %% neuronal contributions - Figures 2, S1, S2, and S3
 fprintf('Plotting BOLD contributions \n')
@@ -48,5 +60,5 @@ simulateAndPlotLNNA()
 fprintf('Plotting Vazquez 2ms and 10ms validation \n')
 plotVazquezValidation()
 
-fprintf('All results have been plotted \n')
+fprintf('\n \n #---------- ALL RESULTS HAVE BEEN PLOTTED ----------# \n')
 end
